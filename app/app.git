@@ -1,0 +1,164 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "rules": {
+    "no-console": "off"
+  }
+}
+ 2 changes: 2 additions & 0 deletions2  
+.gitignore
+
+# Ignore node_modules folder
+node_modules/
+ 3 changes: 3 additions & 0 deletions3  
+.prettierignore
+
+# Ignore artifacts:
+build
+coverage
+ 1 change: 1 addition & 0 deletions1  
+.prettierrc
+
+{}
+ 6 changes: 6 additions & 0 deletions6  
+contents.txt
+
+This is a basic skeleton app containing:
+
+- webpack with CSS support
+- webpack HTML plugin
+- eslint
+- prettier (without eslint conflicts)
+ 1 change: 1 addition & 0 deletions1  
+dist/672abe24027f302a7a8b.svg
+
+ 1 change: 1 addition & 0 deletions1  
+dist/8d317290131028fe10cf.svg
+
+ 1 change: 1 addition & 0 deletions1  
+dist/index.html
+
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Document</title><script defer="defer" src="main.js"></script></head><body><div id="container"><div id="project-container"><h1>Your Projects</h1><div id="add-new-project"><button>Add New Project</button></div></div><div id="task-container"><div id="add-new-task"><button>+</button></div></div></div></body></html>
+ 1 change: 1 addition & 0 deletions1  
+dist/main.js
+Some generated files are not rendered by default. Learn more about how customized files appear on GitHub.
+
+ 10 changes: 10 additions & 0 deletions10  
+eslint.config.mjs
+
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier";
+
+export default [
+  { files: ["**/*.js"], languageOptions: { sourceType: "script" } },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+  eslintConfigPrettier,
+];
+ 12 changes: 12 additions & 0 deletions12  
+jsconfig.json
+
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2020",
+    "jsx": "react",
+    "allowImportingTsExtensions": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}
+ 4,651 changes: 4,651 additions & 0 deletions4,651  
+package-lock.json
+Large diffs are not rendered by default.
+
+ 28 changes: 28 additions & 0 deletions28  
+package.json
+
+{
+  "name": "vscode-eslint-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.0.2",
+    "@eslint/js": "^9.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "globals": "^15.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "prettier": "3.2.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
+ 9 changes: 9 additions & 0 deletions9  
+src/index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+ 6 changes: 6 additions & 0 deletions6  
+src/index.js
+
+function testing() {
+  console.log("aaa");
+  alert("aaa");
+}
+
+testing();
+ 24 changes: 24 additions & 0 deletions24  
+webpack.config.js
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+        template: './src/index.html',
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+};
+
+
